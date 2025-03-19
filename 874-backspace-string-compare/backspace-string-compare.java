@@ -21,12 +21,7 @@ class Solution {
     public boolean backspaceCompare(String s, String t) {
         String s1=isreq(s);
         String t1=isreq(t);
-        System.out.println(s1);
-        System.out.println(t1);
-        if(s1.equals(t1)){
-            return true;
-        }
-        return false;
+        return s1.equals(t1);
 
     }
 }
