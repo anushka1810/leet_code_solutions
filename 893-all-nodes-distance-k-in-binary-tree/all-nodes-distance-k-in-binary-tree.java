@@ -16,11 +16,22 @@ class Solution {
             this.dist=dist;
         }
     }
-    public void Parent(TreeNode curr,TreeNode p,HashMap<TreeNode,TreeNode> parent){
-        if(curr==null) return;
-        parent.put(curr,p);
-        Parent(curr.left,curr,parent);
-        Parent(curr.right,curr,parent);
+    public void Parent(TreeNode root,HashMap<TreeNode,TreeNode> parent){
+        Queue<TreeNode> q=new LinkedList<>();
+        q.add(root);
+        parent.put(root,null);
+
+        while(!q.isEmpty()){
+            TreeNode node=q.poll();
+            if(node.left!=null){
+                q.add(node.left);
+                parent.put(node.left,node);
+            }
+            if(node.right!=null){
+                q.add(node.right);
+                parent.put(node.right,node);
+            }
+        }
     }
     // public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
     //     HashMap<TreeNode,TreeNode> parent=new HashMap<>();
@@ -67,7 +78,7 @@ class Solution {
 
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
         HashMap<TreeNode,TreeNode> parent=new HashMap<>();
-        Parent(root,null,parent);
+        Parent(root,parent);
         Queue<Pair> q=new  LinkedList<>();
         // boolean visited[]=new boolean[501];
         Set<TreeNode> visited = new HashSet<>();
