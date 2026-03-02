@@ -22,45 +22,69 @@ class Node {
 */
 
 class Solution {
-    public void solve(Node root,HashMap<Node,Node> parent){
-        if(root==null) return;
+    // public void solve(Node root,HashMap<Node,Node> parent){
+    //     if(root==null) return;
 
-        Node paa=parent.get(root);
+    //     Node paa=parent.get(root);
 
-        if(paa.left==root){
-            root.next=paa.right;
-        }else{
-            if(paa.next!=null){
-                root.next=paa.next.left;
-            }
-        }
-        solve(root.left,parent);
-        solve(root.right,parent);
+    //     if(paa.left==root){
+    //         root.next=paa.right;
+    //     }else{
+    //         if(paa.next!=null){
+    //             root.next=paa.next.left;
+    //         }
+    //     }
+    //     solve(root.left,parent);
+    //     solve(root.right,parent);
 
 
-    }
+    // }
+    // public Node connect(Node root) {
+    //     if(root==null) return null;
+    //     if(root.left==null) return root;
+    //     HashMap<Node,Node> parent=new HashMap<>();
+    //     parent.put(root,null);
+    //     Queue<Node> q=new LinkedList<>();
+    //     q.add(root);
+
+    //     while(!q.isEmpty()){
+    //         Node node=q.poll();
+    //         if(node.left!=null){
+    //             q.add(node.left);
+    //             parent.put(node.left,node);
+    //         }
+    //         if(node.right!=null){
+    //             q.add(node.right);
+    //             parent.put(node.right,node);
+    //         }
+    //     }
+
+    //     solve(root.left,parent);
+    //     solve(root.right,parent);
+    //     return root;
+    // }
+
+
+
     public Node connect(Node root) {
         if(root==null) return null;
-        if(root.left==null) return root;
-        HashMap<Node,Node> parent=new HashMap<>();
-        parent.put(root,null);
-        Queue<Node> q=new LinkedList<>();
-        q.add(root);
 
-        while(!q.isEmpty()){
-            Node node=q.poll();
-            if(node.left!=null){
-                q.add(node.left);
-                parent.put(node.left,node);
+        Node firstnodeinALevel=root;
+
+        while(firstnodeinALevel.left!=null){
+            Node curr=firstnodeinALevel;
+            while(curr!=null){
+                curr.left.next=curr.right;
+
+                if(curr.next!=null){
+                    curr.right.next=curr.next.left;
+                }
+
+                curr=curr.next;
             }
-            if(node.right!=null){
-                q.add(node.right);
-                parent.put(node.right,node);
-            }
+            firstnodeinALevel=firstnodeinALevel.left;
         }
 
-        solve(root.left,parent);
-        solve(root.right,parent);
         return root;
     }
 }
