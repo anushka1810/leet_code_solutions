@@ -13,26 +13,54 @@
  *     }
  * }
  */
+// class Solution {
+//     StringBuilder ans=new StringBuilder();
+//     public void solve(TreeNode root){
+//         if(root==null) return;
+//         ans.append("(");
+//         ans.append(root.val);
+//         if(root.left!=null || root.right!=null){
+//             if(root.left==null){
+//                 ans.append("()");
+//             }else{
+//                 solve(root.left);
+//             }
+//         }
+//         solve(root.right);
+//         ans.append(")");
+//     }
+//     public String tree2str(TreeNode root) {
+//         solve(root);
+//         ans.deleteCharAt(0);
+//         ans.deleteCharAt(ans.length()-1);
+//         return ans.toString();
+//     }
+// }
+
+
 class Solution {
-    StringBuilder ans=new StringBuilder();
-    public void solve(TreeNode root){
-        if(root==null) return;
-        ans.append("(");
-        ans.append(root.val);
-        if(root.left!=null || root.right!=null){
-            if(root.left==null){
-                ans.append("()");
-            }else{
-                solve(root.left);
-            }
-        }
-        solve(root.right);
-        ans.append(")");
-    }
+
     public String tree2str(TreeNode root) {
-        solve(root);
-        ans.deleteCharAt(0);
-        ans.deleteCharAt(ans.length()-1);
-        return ans.toString();
+        StringBuilder sb = new StringBuilder();
+        solve(root, sb);
+        return sb.toString();
+    }
+
+    public void solve(TreeNode root, StringBuilder sb){
+        if(root == null) return;
+
+        sb.append(root.val);
+
+        if(root.left != null || root.right != null){
+            sb.append("(");
+            solve(root.left, sb);
+            sb.append(")");
+        }
+
+        if(root.right != null){
+            sb.append("(");
+            solve(root.right, sb);
+            sb.append(")");
+        }
     }
 }
