@@ -14,7 +14,9 @@
  * }
  */
 class Solution {
-    public int solve(TreeNode root){
+    
+    public int findBottomLeftValue(TreeNode root) {
+        if(root==null) return 0;
         Queue<TreeNode> q=new LinkedList<>();
         q.add(root);
         int ans=root.val;
@@ -30,9 +32,5 @@ class Solution {
             }   
         }
         return ans;
-    }
-    public int findBottomLeftValue(TreeNode root) {
-        if(root==null) return 0;
-        return solve(root);
     }
 }
