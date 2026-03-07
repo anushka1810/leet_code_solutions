@@ -14,27 +14,25 @@
  * }
  */
 class Solution {
+    int max=Integer.MIN_VALUE;
+    int count=0;
     public int solve(TreeNode root,HashMap<Integer,Integer> h){
         if(root==null){
             return 0;
         }
         int sum=solve(root.left,h)+ solve(root.right,h)+root.val;
         h.put(sum,h.getOrDefault(sum,0)+1);
+        if(h.get(sum)>max){
+            max=h.get(sum);
+            count=1;
+        }else if(h.get(sum)==max){
+            count++;
+        }
         return sum;
     }
     public int[] findFrequentTreeSum(TreeNode root) {
         HashMap<Integer,Integer> h=new HashMap<>();
         solve(root,h);
-        int max=Integer.MIN_VALUE;
-        int count=0;
-        for(int num:h.values()){
-            if(num>max){
-                max=num;
-                count=1;
-            }else if(num==max){
-                count++;
-            }
-        }
         int ans[]=new int[count];
         int k=0;
         for(int num:h.keySet()){
