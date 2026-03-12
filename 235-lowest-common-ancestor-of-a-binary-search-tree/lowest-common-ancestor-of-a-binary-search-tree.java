@@ -30,9 +30,7 @@ class Solution {
 
 
         while(root!=null){
-            if(root.val==p.val || root.val==q.val){
-                return root;
-            }else if(root.val>p.val && root.val>q.val){
+            if(root.val>p.val && root.val>q.val){
                 root=root.left;
             }else if(root.val<p.val && root.val<q.val){
                 root=root.right;
