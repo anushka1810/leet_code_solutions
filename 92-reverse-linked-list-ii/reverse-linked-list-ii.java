@@ -17,7 +17,6 @@ class Solution {
         for(int i=0;i<left-1;i++){
             temp1=temp1.next;
         }
-        System.out.println(temp1.val);                                                                         
         ListNode temp2=temp1.next;
         ListNode l=temp2; 
         ListNode prev=temp1; 
