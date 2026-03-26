@@ -19,41 +19,41 @@ class Solution {
                 }
             }
 
-        //     while(i<=j){
-        //         if(h.containsKey(s.charAt(i))){
-        //             if(h.get(s.charAt(i))<0){
-        //                 h.put(s.charAt(i),h.get(s.charAt(i))+1);
-        //             }else{
-        //                 break;
-        //             }
-        //         }
-        //         i++;
-        //     }
-        //     if(count==0){
-        //         if(j-i+1<ans){
-        //             ans=j-i+1;
-        //             x=i;
-        //             y=j;
-        //         }
-        //     }
-        //     j++;
-        // }
-
-            while(i<=j && count==0){
-                if(j-i+1<ans){
-                    ans=j-i+1;
-                    x=i;
-                }
+            while(i<=j){
                 if(h.containsKey(s.charAt(i))){
-                    h.put(s.charAt(i),h.get(s.charAt(i))+1);
-                    if(h.get(s.charAt(i))>0) count++;  
+                    if(h.get(s.charAt(i))<0){
+                        h.put(s.charAt(i),h.get(s.charAt(i))+1);
+                    }else{
+                        break;
+                    }
                 }
                 i++;
             }
-                      
-                
+            if(count==0){
+                if(j-i+1<ans){
+                    ans=j-i+1;
+                    x=i;
+                    y=j;
+                }
+            }
             j++;
         }
+
+            // while(i<=j && count==0){
+            //     if(j-i+1<ans){
+            //         ans=j-i+1;
+            //         x=i;
+            //     }
+            //     if(h.containsKey(s.charAt(i))){
+            //         h.put(s.charAt(i),h.get(s.charAt(i))+1);
+            //         if(h.get(s.charAt(i))>0) count++;  
+            //     }
+            //     i++;
+            // }
+                      
+                
+            // j++;
+        // }
 
         if(ans==Integer.MAX_VALUE) return "";
         return s.substring(x,x+ans);
