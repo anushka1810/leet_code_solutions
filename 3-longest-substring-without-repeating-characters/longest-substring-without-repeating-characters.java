@@ -7,7 +7,7 @@ class Solution {
             char c1=s.charAt(j);
             h.put(c1,h.getOrDefault(c1,0)+1);
 
-            while(i<=j && j-i+1>h.size()){
+            if(i<=j && j-i+1>h.size()){
                 char c2=s.charAt(i);
                 h.put(c2,h.get(c2)-1);
                 if(h.get(c2)==0){
