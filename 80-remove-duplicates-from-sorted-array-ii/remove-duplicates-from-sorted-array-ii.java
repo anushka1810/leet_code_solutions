@@ -8,13 +8,17 @@ class Solution {
             if(nums[last]==nums[i]){
                 count++;
                 if(count>=3){
-                    nums[i]=Integer.MAX_VALUE;
-                    // continue;
+                    // nums[i]=Integer.MAX_VALUE;
+                    i++;
+                    continue;
                 }else{
+                    nums[k]=nums[i];
                     last=i;
                     k++;
                 }
             }else{
+                // swap(nums,k,i);
+                nums[k]=nums[i];
                 prev=i;
                 last=i;
                 count=1;
@@ -22,7 +26,7 @@ class Solution {
             }
             i++;
         }
-        Arrays.sort(nums);
+        // Arrays.sort(nums);
         return k;
     }
 }
