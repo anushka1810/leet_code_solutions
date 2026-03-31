@@ -14,29 +14,26 @@
  * }
  */
 class Solution {
-    public boolean isLeaf(TreeNode root){
-        if(root.left==null && root.right==null) return true;
-        return false;
-    }
-    public void solve(TreeNode node,List<List<Integer>> ans,List<Integer> path,int sum,int target){
-        path.add(node.val);
-        int size=path.size();
-        sum+=node.val;
-        if(isLeaf(node)){
-            if(sum==target){
-                ans.add(new ArrayList<>(path));
-            }
-        }else{
-            if(node.left!=null) solve(node.left,ans,path,sum,target);
-            if(node.right!=null) solve(node.right,ans,path,sum,target);
+    public void calculate(TreeNode root,int targetSum,ArrayList<Integer> path,List<List<Integer>> ans){
+        if(root==null) return ;
+
+        path.add(root.val);
+        if(root.left==null && root.right==null){
+            int sum=0;
+            for(int num:path) sum+=num;
+
+            if(sum==targetSum) ans.add(new ArrayList<>(path));
         }
-        path.remove(size-1);
+
+        calculate(root.left,targetSum,path,ans);
+        calculate(root.right,targetSum,path,ans);
+
+        path.remove(path.size()-1);
     }
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         List<List<Integer>> ans=new ArrayList<>();
-        List<Integer> path=new ArrayList<>();
-        if(root==null) return ans;
-        solve(root,ans,path,0,targetSum);
+
+        calculate(root,targetSum,new ArrayList<>(),ans);
         return ans;
     }
 }
