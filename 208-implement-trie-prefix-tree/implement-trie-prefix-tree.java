@@ -28,10 +28,11 @@ class Trie {
             }
             curr=curr.children[idx];
 
-            if(i==word.length()-1){
-                curr.eow=true;
-            }
+            // if(i==word.length()-1){
+            //     curr.eow=true;
+            // }
         }
+        curr.eow=true;
     }
     
     public boolean search(String word) {
@@ -43,10 +44,11 @@ class Trie {
             if(curr.children[idx]==null) return false;
             // if(i=word.length()-1 && !curr.children[idx].eow) return false;
             curr=curr.children[idx];
-            if(i==word.length()-1 && !curr.eow) return false;
+            // if(i==word.length()-1 && !curr.eow) return false;
             
         }
-        return true;
+        // return true;
+        return curr.eow;
     }
     
     public boolean startsWith(String prefix) {
