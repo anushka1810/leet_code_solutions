@@ -18,7 +18,7 @@ class Solution {
 
         while(temp!=null){
             ListNode next=temp.next;
-            // temp.next=null;
+            temp.next=null;
             if(temp.val<x){
                 l.next=temp;
                 l=temp;
@@ -29,7 +29,7 @@ class Solution {
             temp=next;
         }
         l.next=great.next;
-        g.next=null;
+        // g.next=null;
         return less.next;
     }
 }
