@@ -73,12 +73,13 @@ class Solution {
             if(prev.next==temp){
                 ansList.next=prev;
                 ansList=ansList.next;
+                ansList.next=null;
             }
 
             prev=temp;
 
         }
-        ansList.next=null;
+        
 
         return dummy.next;
     }
