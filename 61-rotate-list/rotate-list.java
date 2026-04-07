@@ -85,6 +85,7 @@ class Solution {
             n++;
         }
         k=k%n;
+        if(k==0) return head;
 
         for(int i=0;i<k;i++){
             fast=fast.next;
