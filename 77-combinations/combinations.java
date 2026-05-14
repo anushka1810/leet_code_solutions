@@ -8,6 +8,8 @@ class Solution {
             return;
         }
 
+        if(n-idx+1+path.size()<k)  return ;
+
         // pick
         path.add(idx);
         helper(n,k,idx+1,ans,path);
