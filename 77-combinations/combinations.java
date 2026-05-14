@@ -1,13 +1,10 @@
 class Solution {
     public void helper(int n,int k,int idx, List<List<Integer>> ans,List<Integer> path){
-        if(idx==n+1){
-            if(path.size()==k){
-                ans.add(new ArrayList<>(path));
-            }
-            return;
-        }
         if(path.size()==k){
             ans.add(new ArrayList<>(path));
+            return;
+        }
+        if(idx==n+1){
             return;
         }
 
