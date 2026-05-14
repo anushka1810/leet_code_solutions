@@ -4,12 +4,15 @@ class Solution {
             ans.add(new ArrayList<>(path));
             return ;
         }
-        if(idx==candidates.length || sum>target) return;
-        if(candidates[idx]+sum<=target){
-            path.add(candidates[idx]);
-            solve(candidates,sum+candidates[idx],target,ans,idx,path);
-            path.remove(path.size()-1);
-        }
+        if(idx==candidates.length|| sum>target) return;
+        path.add(candidates[idx]);
+        solve(candidates,sum+candidates[idx],target,ans,idx,path);
+        path.remove(path.size()-1);
+        // if(candidates[idx]+sum<=target){
+        //     path.add(candidates[idx]);
+        //     solve(candidates,sum+candidates[idx],target,ans,idx,path);
+        //     path.remove(path.size()-1);
+        // }
         solve(candidates,sum,target,ans,idx+1,path);
     }
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
