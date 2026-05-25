@@ -1,66 +1,65 @@
-class Trie {
     class Node{
-        Node[] children;
+        Node children[];
         boolean eow;
 
         Node(){
-            children=new Node[26];
-            // for(int i=0;i<26;i++){
-            //     children[i]=null;
-            // }
-            eow=false;
+            this.children=new Node[26];
+            for(int i=0;i<26;i++){
+                this.children[i]=null;
+            }
+            this.eow=false;
         }
     }
+class Trie {
     Node root;
+
     public Trie() {
-
         this.root=new Node();
-
+        
     }
     
     public void insert(String word) {
-        Node curr=root;
+        Node temp=root;
+
         for(int i=0;i<word.length();i++){
-            int idx=word.charAt(i)-'a';
+            int index=word.charAt(i)-'a';
 
-            if(curr.children[idx]==null){
-                curr.children[idx]=new Node();
+            if(temp.children[index]==null){
+                temp.children[index]=new Node();
             }
-            curr=curr.children[idx];
-
-            // if(i==word.length()-1){
-            //     curr.eow=true;
-            // }
+            temp=temp.children[index];
         }
-        curr.eow=true;
+        temp.eow=true;
     }
     
     public boolean search(String word) {
-        Node curr=root;
+        Node temp=root;
 
         for(int i=0;i<word.length();i++){
-            int idx=word.charAt(i)-'a';
+            int index=word.charAt(i)-'a';
 
-            if(curr.children[idx]==null) return false;
-            // if(i=word.length()-1 && !curr.children[idx].eow) return false;
-            curr=curr.children[idx];
-            // if(i==word.length()-1 && !curr.eow) return false;
-            
+            if(temp.children[index]==null){
+                return false;
+            }
+            temp=temp.children[index];
         }
-        // return true;
-        return curr.eow;
+        return temp.eow;
+        
     }
     
-    public boolean startsWith(String prefix) {
-        Node curr=root;
+    public boolean startsWith(String word) {
+        Node temp=root;
 
-        for(int i=0;i<prefix.length();i++){
-            int idx=prefix.charAt(i)-'a';
+        for(int i=0;i<word.length();i++){
+            int index=word.charAt(i)-'a';
 
-            if(curr.children[idx]==null) return false;
-            curr=curr.children[idx];
+            if(temp.children[index]==null){
+                return false;
+            }
+            temp=temp.children[index];
         }
         return true;
+        
     }
 }
 
