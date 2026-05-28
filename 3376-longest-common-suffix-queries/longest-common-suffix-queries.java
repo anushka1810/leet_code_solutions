@@ -6,7 +6,7 @@ class Node{
     Node (){
         this.children=new Node[26];
         for(int i=0;i<26;i++){
-            this.children[idx]=null;
+            this.children[i]=null;
         }
         this.eow=false;
         this.idx=-1;
@@ -58,14 +58,15 @@ class Solution {
             s.reverse();
             t.insert(s.toString(),i,wordsContainer);
         }
+        t.root.idx=min;
         int ans[]=new int[wordsQuery.length];
         for(int i=0;i<wordsQuery.length;i++){
             StringBuilder s=new StringBuilder(wordsQuery[i]);
             s.reverse();
             ans[i]=t.prefixFind(s.toString());
-            if(ans[i]==-1){
-                ans[i]=min;
-            }
+            // if(ans[i]==-1){
+            //     ans[i]=min;
+            // }
         }
 
         return ans;        
