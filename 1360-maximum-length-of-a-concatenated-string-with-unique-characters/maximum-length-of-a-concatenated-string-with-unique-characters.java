@@ -8,7 +8,7 @@ class Solution {
         }
         return true;
     }
-    public int solve(List<String> arr,HashSet<Character> h,int idx,StringBuilder str,int ansKiLength){
+    public int solve(List<String> arr,HashSet<Character> h,int idx,StringBuilder str){
         if(idx==arr.size()){
             return str.length();
         }
@@ -21,20 +21,20 @@ class Solution {
             }
             str.append(arr.get(idx));
 
-            taken=solve(arr,h,idx+1,str,ansKiLength);
+            taken=solve(arr,h,idx+1,str);
             
             for(char ch:arr.get(idx).toCharArray()){
                 h.remove(ch);
             }
             str.delete(oldlen,str.length());
         }
-        nottaken=solve(arr,h,idx+1,str,ansKiLength);
+        nottaken=solve(arr,h,idx+1,str);
         return Math.max(taken,nottaken);
     }
     public int maxLength(List<String> arr) {
         HashSet<Character> h=new HashSet<>();
         StringBuilder s=new StringBuilder();
 
-        return solve(arr,h,0,s,0);
+        return solve(arr,h,0,s);
     }
 }
