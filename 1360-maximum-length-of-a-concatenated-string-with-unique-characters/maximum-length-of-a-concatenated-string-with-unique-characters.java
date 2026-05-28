@@ -10,9 +10,9 @@ class Solution {
     }
     public int solve(List<String> arr,HashSet<Character> h,int idx,StringBuilder str,int ansKiLength){
         if(idx==arr.size()){
-            int len=str.length();
-            return Math.max(len,ansKiLength);
+            return str.length();
         }
+        int taken=0,nottaken=0;
 
         if(isValid(arr,h,idx)){
             int oldlen=str.length();
@@ -21,15 +21,15 @@ class Solution {
             }
             str.append(arr.get(idx));
 
-            ansKiLength=solve(arr,h,idx+1,str,ansKiLength);
+            taken=solve(arr,h,idx+1,str,ansKiLength);
             
             for(char ch:arr.get(idx).toCharArray()){
                 h.remove(ch);
             }
             str.delete(oldlen,str.length());
         }
-        ansKiLength=solve(arr,h,idx+1,str,ansKiLength);
-        return ansKiLength;
+        nottaken=solve(arr,h,idx+1,str,ansKiLength);
+        return Math.max(taken,nottaken);
     }
     public int maxLength(List<String> arr) {
         HashSet<Character> h=new HashSet<>();
