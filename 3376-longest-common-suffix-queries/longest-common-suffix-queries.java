@@ -22,7 +22,7 @@ class Trie{
 
     public void insert(String s,int index,String[] wordContainer){
         Node temp=root;
-        for(int i=0;i<s.length();i++){
+        for(int i=s.length()-1;i>=0;i--){
             int idx1=s.charAt(i)-'a';
 
             if(temp.children[idx1]==null){
@@ -37,7 +37,7 @@ class Trie{
     public int prefixFind(String s){
         Node temp=root;
 
-        for(int i=0;i<s.length();i++){
+        for(int i=s.length()-1;i>=0;i--){
             int idx1=s.charAt(i)-'a';
 
             if(temp.children[idx1]==null) return temp.idx;
@@ -54,19 +54,18 @@ class Solution {
         int min=0;
         for(int i=0;i<wordsContainer.length;i++){
             if(wordsContainer[i].length()<wordsContainer[min].length()) min=i;
-            StringBuilder s=new StringBuilder(wordsContainer[i]);
-            s.reverse();
-            t.insert(s.toString(),i,wordsContainer);
+            // StringBuilder s=new StringBuilder(wordsContainer[i]);
+            // s.reverse();
+            // t.insert(s.toString(),i,wordsContainer);
+            t.insert(wordsContainer[i],i,wordsContainer);
         }
         t.root.idx=min;
         int ans[]=new int[wordsQuery.length];
         for(int i=0;i<wordsQuery.length;i++){
-            StringBuilder s=new StringBuilder(wordsQuery[i]);
-            s.reverse();
-            ans[i]=t.prefixFind(s.toString());
-            // if(ans[i]==-1){
-            //     ans[i]=min;
-            // }
+            // StringBuilder s=new StringBuilder(wordsQuery[i]);
+            // s.reverse();
+            // ans[i]=t.prefixFind(s.toString());
+            ans[i]=t.prefixFind(wordsQuery[i]);
         }
 
         return ans;        
