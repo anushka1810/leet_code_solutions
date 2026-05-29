@@ -30,7 +30,7 @@ class Solution {
         ans+=solve(root.right,targetSum,h,currSum);
 
         h.put(currSum,h.get(currSum)-1);
-        if(h.get(currSum)==0) h.remove(currSum);
+        // if(h.get(currSum)==0) h.remove(currSum);
 
         currSum-=root.val;
 
