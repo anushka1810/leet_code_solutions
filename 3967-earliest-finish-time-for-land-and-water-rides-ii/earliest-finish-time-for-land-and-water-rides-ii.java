@@ -7,11 +7,7 @@ class Solution {
 
         long minTotal=Long.MAX_VALUE;
         for(int i=0;i<SrStart.length;i++){
-            if(SrStart[i]<=min){
-                minTotal=Math.min(minTotal,min+SrDur[i]);
-            }else{
-                minTotal=Math.min(minTotal,SrStart[i]+SrDur[i]);
-            }
+            minTotal=Math.min(minTotal,Math.max(min,SrStart[i])+SrDur[i]);
 
         }
 
