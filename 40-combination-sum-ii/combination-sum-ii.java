@@ -1,24 +1,29 @@
 class Solution {
-    public void solve(int[] candidates,int sum, int target,List<List<Integer>> ans,int idx,List<Integer> path){
-        if(sum==target){
-            ans.add(new ArrayList<>(path));
-            return ;
+    public void solve(int[] nums,List<List<Integer>> ans,List<Integer> temp,int idx,int target){
+        if(target==0){
+            ans.add(new ArrayList<>(temp));
+            return;
         }
-        if(idx==candidates.length|| sum>target) return;
+        if(idx==nums.length){
+            if(target==0) ans.add(new ArrayList<>(temp));
+            return;
+        }
+        //pick
+        if(nums[idx]<=target){
+            temp.add(nums[idx]);
+            solve(nums,ans,temp,idx+1,target-nums[idx]);
+            temp.remove(temp.size()-1);    
+        }
 
-        path.add(candidates[idx]);
-        solve(candidates,sum+candidates[idx],target,ans,idx+1,path);
-        path.remove(path.size()-1);
-        
-        while(idx+1<candidates.length && candidates[idx+1]==candidates[idx]) idx++;
-        solve(candidates,sum,target,ans,idx+1,path);
+        //not pick
+        while(idx<nums.length-1 && nums[idx]==nums[idx+1]) idx++;
+        solve(nums,ans,temp,idx+1,target);
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        Arrays.sort(candidates);
         List<List<Integer>> ans=new ArrayList<>();
-        List<Integer> path=new ArrayList<>();
-
-        solve(candidates,0,target,ans,0,path);
+        List<Integer> temp=new ArrayList<>();
+        Arrays.sort(candidates);
+        solve(candidates,ans,temp,0,target);
         return ans;
     }
 }
