@@ -8,14 +8,12 @@ class Solution {
             if(target==0) ans.add(new ArrayList<>(temp));
             return;
         }
-
         //pick
         if(nums[idx]<=target){
             temp.add(nums[idx]);
             solve(nums,ans,temp,idx,target-nums[idx]);
             temp.remove(temp.size()-1);    
         }
-
         //not pick
         solve(nums,ans,temp,idx+1,target);
     }
