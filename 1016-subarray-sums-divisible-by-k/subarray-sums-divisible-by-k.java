@@ -11,7 +11,7 @@ class Solution {
 
             
             int rem=sum%k;
-            if(rem<0) rem=(rem+k)%k;
+            if(rem<0) rem=(rem+k);
             if(h.containsKey(rem)) ans+=h.get(rem);
             h.put(rem,h.getOrDefault(rem,0)+1);
             i++;
