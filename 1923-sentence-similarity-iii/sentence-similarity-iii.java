@@ -36,7 +36,7 @@ class Solution {
         while(i<n2 && s1[i].equals(s2[i])){
             i++;
         }
-        while(j2>=0 && s1[j1].equals(s2[j2])){
+        while(j2>=i && s1[j1].equals(s2[j2])){
             j1--;
             j2--;
         }
