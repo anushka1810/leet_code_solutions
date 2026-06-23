@@ -30,19 +30,18 @@ class Solution {
 
         if(n1<n2) return  areSentencesSimilar(sentence2,sentence1);
 
-        int i1=0,j1=n1-1;
-        int i2=0,j2=n2-1;
+        int i=0,j1=n1-1;
+        int j2=n2-1;
 
-        while(i2<n2 && s1[i1].equals(s2[i2])){
-            i1++;
-            i2++;
+        while(i<n2 && s1[i].equals(s2[i])){
+            i++;
         }
         while(j2>=0 && s1[j1].equals(s2[j2])){
             j1--;
             j2--;
         }
 
-        return (j2<i2);
+        return (j2<i);
 
         
     }
