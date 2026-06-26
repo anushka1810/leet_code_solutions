@@ -8,6 +8,11 @@ class Solution {
         // but ek condition hume aur dekhni pdegi ki |Xi-Xj|<=k hona chahiye 
         // uske liye prev pt ka x cordinate bhi chahiye hoga 
         // toh hum pq usse bhi store  krege 
+        // ab har j pt ke xi+xj calculate kre phir hum xi+yi ka maximum value pq se nikale 
+        // lekin agr pq.peek() me prev pt ka x cordinate hai aur current pt ka x cordinate hai toh toh condition phle check kro agr condition satisfy nhi hui toh uske baad ke pt ke liye bhi nhi hogi kyu unka x cordinate toh bda hoga curr se kyuki x cordinate sorted hai toh that means uss pt ka ab koi kamm nhi remove that pt 
+        // and if pq.me koi element bacha remove krne ke baad toh that pt will contribute a pair 
+        // and  since we have to track the maximum toh uske nicghe uss pt ke liye check krne ki jaruirat nhi hai 
+        
         PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->b[0]-a[0]);
         int max=Integer.MIN_VALUE;
 
