@@ -43,7 +43,9 @@ class Solution {
                         curr.h=0;
                         st.pop();
                     }
-                }    
+                }
+
+                //if(curr.h>0) st.push(curr);   
             }
         }
 
