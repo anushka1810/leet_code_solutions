@@ -1,20 +1,21 @@
 class MinStack {
-    Stack<Long> st=new Stack<>();
-    long minV=0;
+    Stack<Long> st;
+    long MinV=0;
     public MinStack() {
+       st=new Stack<>();
     }
     
-    public void push(int val) {
-        long x=(long)val;
+    public void push(int value) {
         if(st.isEmpty()){
-            st.push(x);
-            minV=x;
+            st.push((long)value);
+            MinV=(long)value;
         }else{
-            if(x<minV){
-                st.push(2*x-minV);
-                minV=x;
+            if(value<MinV){
+                long val=(long)2*value-MinV;
+                st.push(val);
+                MinV=(long)value;
             }else{
-                st.push(x);
+                st.push((long)value);
             }
         }
     }
@@ -22,36 +23,35 @@ class MinStack {
     public void pop() {
         if(st.isEmpty()){
             return;
-        }
-        if(st.peek()<minV){           //do not use== sign as it compare object reference 
-            minV=2* minV-st.peek();   //2*val-oldMinV==St.peek();     aur min=val-----------hr ek push pe                                    //toh hrr ek pop pe oldMinV=st.peek()-2*minV
-        }
-        st.pop();
+        }else{
+            if(st.peek()<MinV){
+                long oldMin=2*MinV-st.peek();
+                st.pop();
+                MinV=oldMin;
+            }else{
+                st.pop();
+            }
+        }   
     }
     
     public int top() {
-        if(st.isEmpty()){
-            return -1;
+        if(st.peek()<MinV){
+            return (int)MinV;
+        }else{
+            long ans=st.peek();
+            return (int)ans;
         }
-        if(st.peek()<minV){
-            return (int)minV;
-        }
-        long ans=st.peek();
-        return (int)ans;
     }
     
     public int getMin() {
-        if(st.isEmpty()){
-            return -1;
-        }
-        return (int)minV;
+        return (int)MinV;
     }
 }
 
 /**
  * Your MinStack object will be instantiated and called as such:
  * MinStack obj = new MinStack();
- * obj.push(val);
+ * obj.push(value);
  * obj.pop();
  * int param_3 = obj.top();
  * int param_4 = obj.getMin();
