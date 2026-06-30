@@ -1,50 +1,53 @@
 class WordDictionary {
-    class Node{
-        Node children[]=new Node[26];
-        boolean eow=false;
-    }
-    Node root;
+    class trie{
+        trie[] children;
+        boolean eow;
+        trie(){
+            this.children=new trie[26];
+            this.eow=false;
+            for(int i=0;i<26;i++){
+                children[i]=null;
+            }
 
+        }
+    }
+
+    trie root;
     public WordDictionary() {
-        this.root=new Node();
+        this.root=new trie(); 
     }
     
     public void addWord(String word) {
-        Node curr=root;
+        trie curr=root;
 
-        for(int i=0;i<word.length();i++){
-            int idx=word.charAt(i)-'a';
-
+        for(char ch:word.toCharArray()){
+            int idx=ch-'a';
             if(curr.children[idx]==null){
-                curr.children[idx]=new Node();
+                curr.children[idx]=new trie();
             }
             curr=curr.children[idx];
         }
-
         curr.eow=true;
     }
-    public boolean dfs(String word,int idx,Node curr){
-        if(curr==null) return false;
+    
 
-        if(idx==word.length()) return curr.eow;
+    public boolean dfs(String word,int i,trie curr){
+        if(i==word.length()) return curr.eow;
 
-        if(word.charAt(idx)=='.'){
-            for(int i=0;i<26;i++){
-                if(curr.children[i]!=null){
-                    if(dfs(word,idx+1,curr.children[i])) return true;
+        if(word.charAt(i)=='.'){
+            for(int j=0;j<26;j++){
+                if(curr.children[j]!=null){
+                    if(dfs(word,i+1,curr.children[j])) return true;
                 }
             }
         }else{
-            int i=word.charAt(idx)-'a';
-            return dfs(word,idx+1,curr.children[i]);
+            int idx=word.charAt(i)-'a';
+            if(curr.children[idx]==null) return false;
+            if(dfs(word,i+1,curr.children[idx])) return true;
         }
 
         return false;
-
-
-
     }
-    
     public boolean search(String word) {
         return dfs(word,0,root);
     }
