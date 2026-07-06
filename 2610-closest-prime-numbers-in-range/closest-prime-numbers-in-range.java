@@ -1,41 +1,40 @@
 class Solution {
     public int[] closestPrimes(int left, int right) {
-        boolean[] isPrime = sieve(right);
-        List<Integer> primes = new ArrayList<>();
-        for (int i = left; i <= right; i++) {
-            if (isPrime[i]) {
-                primes.add(i);
-            }
-        }
-        if (primes.size() < 2) {
-            return new int[]{-1, -1};
-        }
-        int minDiff = Integer.MAX_VALUE;
-        int[] closestPair = new int[2];
+        boolean Sieve[]=new boolean[right+1];
+        Arrays.fill(Sieve,true);
 
-        for (int i = 1; i < primes.size(); i++) {
-            int diff = primes.get(i) - primes.get(i - 1);
-            if (diff < minDiff) {
-                minDiff = diff;
-                closestPair[0] = primes.get(i - 1);
-                closestPair[1] = primes.get(i);
-            }
-        }
+        Sieve[0]=false;
+        Sieve[1]=false;
+        for(int i=2;i<=right;i++){
+            if(Sieve[i]){
 
-        return closestPair;
-    }
-    private static boolean[] sieve(int n) {
-        boolean[] isPrime = new boolean[n + 1];
-        Arrays.fill(isPrime, true);
-        isPrime[0] = isPrime[1] = false; // 0 and 1 are not prime
-        
-        for (int i = 2; i * i <= n; i++) {
-            if (isPrime[i]) {
-                for (int j = i * i; j <= n; j += i) {
-                    isPrime[j] = false;
+                for(int j=i*i;j<=right && (long)i*i<=right;j+=i){
+                    Sieve[j]=false;
                 }
             }
         }
-        return isPrime;
+
+        long ans=Long.MAX_VALUE;
+        long ansL=-1,ansR=-1;
+        long l=-1;
+        for(long l1=left;l1<=right && (long)l1<=right;l1++){
+            if(Sieve[(int)l1]){
+                l=l1;
+                break;
+            }
+        }
+        if(l==-1) return new int[]{-1,-1};
+        for(long r=l+1;r<=right && (long)r<=right;r++){
+            if(Sieve[(int)r]){
+                if(r-l<ans){
+                    ansL=l;
+                    ansR=r;
+                    ans=r-l;
+                }
+                l=r;
+            }
+        }
+
+        return new int[]{(int)ansL,(int)ansR};
     }
 }
