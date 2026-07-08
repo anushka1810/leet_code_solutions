@@ -1,73 +1,67 @@
-class Node{
-    Node children[];
-    boolean eow;
-    int idx;
-
-    Node (){
-        this.children=new Node[26];
-        for(int i=0;i<26;i++){
-            this.children[i]=null;
-        }
-        this.eow=false;
-        this.idx=-1;
-    }
-}
-
-class Trie{
-
-    Node root;
-    Trie(){
-        this.root=new Node();
-    }
-
-    public void insert(String s,int index,String[] wordContainer){
-        Node temp=root;
-        for(int i=s.length()-1;i>=0;i--){
-            int idx1=s.charAt(i)-'a';
-
-            if(temp.children[idx1]==null){
-                temp.children[idx1]=new Node();
-            }
-            temp=temp.children[idx1];
-            if(temp.idx==-1 || wordContainer[temp.idx].length()>wordContainer[index].length()) temp.idx=index;
-        }
-        temp.eow=true;
-    }
-
-    public int prefixFind(String s){
-        Node temp=root;
-
-        for(int i=s.length()-1;i>=0;i--){
-            int idx1=s.charAt(i)-'a';
-
-            if(temp.children[idx1]==null) return temp.idx;
-            temp=temp.children[idx1];
-        }
-        return temp.idx;
-    }
-}
-
 class Solution {
+    class Trie{
+        int idx;
+        Trie children[];
+
+        Trie(){
+            this.children=new Trie[26];
+            for(int i=0;i<26;i++){
+
+                children[i]=null;
+            }
+            this.idx=-1;
+        }
+    }
+    Trie root=new Trie();
+    public void build(String[] wordsContainer){
+        int minLength=0;
+        for(int j=0;j<wordsContainer.length;j++){
+            int n=wordsContainer[j].length();
+            Trie temp=root;
+            for(int i=n-1;i>=0;i--){
+                char ch=wordsContainer[j].charAt(i);
+                int idx1=ch-'a';
+
+                if(temp.children[idx1]==null){
+                    temp.children[idx1]=new Trie();
+                    temp.children[idx1].idx=j;
+                }else{
+                    int prev=temp.children[idx1].idx;
+                    if(wordsContainer[j].length()<wordsContainer[prev].length()){
+                        temp.children[idx1].idx=j;
+                    }
+
+                }
+                temp=temp.children[idx1];
+            }
+
+            if(wordsContainer[minLength].length()>wordsContainer[j].length()) minLength=j;
+        }
+
+        root.idx=minLength;
+    }
     public int[] stringIndices(String[] wordsContainer, String[] wordsQuery) {
 
-        Trie t=new Trie();
-        int min=0;
-        for(int i=0;i<wordsContainer.length;i++){
-            if(wordsContainer[i].length()<wordsContainer[min].length()) min=i;
-            // StringBuilder s=new StringBuilder(wordsContainer[i]);
-            // s.reverse();
-            // t.insert(s.toString(),i,wordsContainer);
-            t.insert(wordsContainer[i],i,wordsContainer);
-        }
-        t.root.idx=min;
+        build(wordsContainer);
         int ans[]=new int[wordsQuery.length];
-        for(int i=0;i<wordsQuery.length;i++){
-            // StringBuilder s=new StringBuilder(wordsQuery[i]);
-            // s.reverse();
-            // ans[i]=t.prefixFind(s.toString());
-            ans[i]=t.prefixFind(wordsQuery[i]);
-        }
 
-        return ans;        
+
+        for(int j=0;j<wordsQuery.length;j++){
+            Trie temp=root;
+            int n=wordsQuery[j].length();
+
+            for(int i=n-1;i>=0;i--){
+                int index=wordsQuery[j].charAt(i)-'a';
+
+                if(temp.children[index]==null){
+                    break;
+                }
+
+                temp=temp.children[index];
+            }
+            ans[j]=temp.idx;
+        }
+        return ans;
+        
     }
 }
