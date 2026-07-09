@@ -13,11 +13,11 @@ class Solution {
         segment[idx]=Math.max(segment[(2*idx)+1],segment[(2*idx)+2]);
     }
 
-    public boolean canPlace(int[] segment,boolean[] assigned,int target,int currL,int currR,int idx){
+    public boolean canPlace(int[] segment,int target,int currL,int currR,int idx){
 
         if(segment[idx] < target) return false;
         if(currL==currR){
-            if(segment[idx]>=target && !assigned[currL]){
+            if(segment[idx]>=target){
                 segment[idx]=Integer.MIN_VALUE;
                 return true;
             }
@@ -26,11 +26,11 @@ class Solution {
         
 
         int mid=currL+(currR-currL)/2;
-        if(canPlace(segment,assigned,target,currL,mid,(2*idx)+1)){
+        if(canPlace(segment,target,currL,mid,(2*idx)+1)){
             segment[idx]=Math.max(segment[(2*idx)+1],segment[(2*idx)+2]);
             return true;
         }
-        if(canPlace(segment,assigned,target,mid+1,currR,(2*idx)+2)){
+        if(canPlace(segment,target,mid+1,currR,(2*idx)+2)){
             segment[idx]=Math.max(segment[(2*idx)+1],segment[(2*idx)+2]);
             return true;
         }
@@ -44,10 +44,9 @@ class Solution {
 
         build(baskets,segment,0,n-1,0);
         int ans=0;
-        boolean[] assigned=new boolean[n];
 
         for(int num:fruits){
-            if(!canPlace(segment,assigned,num,0,n-1,0)) ans++;
+            if(!canPlace(segment,num,0,n-1,0)) ans++;
         }
 
         return ans;
