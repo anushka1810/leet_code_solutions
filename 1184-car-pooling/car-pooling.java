@@ -14,11 +14,9 @@ class Solution {
        }
 
        int prefix=0;
-       for(int i=0;i<1001;i++){
+       for(int i=0;i<=max;i++){
         prefix+=segment[i];
         if(prefix>capacity) return false;
-        if(i==max) break;
-
        }
        return true;
     }
