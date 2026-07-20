@@ -57,6 +57,8 @@ class Solution {
     }
     public int makeConnected(int n, int[][] connections) {
 
+        if(connections.length < n-1) return -1;
+
         DSU obj=new DSU(n);
 
         int couldremove=0;
