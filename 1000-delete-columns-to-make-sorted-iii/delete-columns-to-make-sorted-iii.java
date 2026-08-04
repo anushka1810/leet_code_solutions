@@ -22,8 +22,6 @@ class Solution {
 
                 if(possible){
                     dp[i]=Math.max(dp[i],dp[j]+1);
-                }else{
-                    dp[i]=Math.max(dp[i],1);
                 }
             }
             if(dp[i]>max) max=dp[i];
