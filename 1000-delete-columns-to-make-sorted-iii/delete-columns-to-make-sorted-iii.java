@@ -4,7 +4,7 @@ class Solution {
         int len=strs[0].length();
 
         int[]dp=new int[len];
-        dp[0]=1;
+        Arrays.fill(dp,1);
 
         int max=1;
         for(int i=1;i<len;i++){
@@ -30,7 +30,5 @@ class Solution {
         }
 
         return len-max;
-
-
     }
 }
