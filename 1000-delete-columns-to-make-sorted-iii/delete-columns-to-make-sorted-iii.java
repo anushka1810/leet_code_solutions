@@ -6,6 +6,7 @@ class Solution {
         int[]dp=new int[len];
         dp[0]=1;
 
+        int max=1;
         for(int i=1;i<len;i++){
             for(int j=0;j<i;j++){
                 //check for i and j char for each string 
@@ -25,12 +26,7 @@ class Solution {
                     dp[i]=Math.max(dp[i],1);
                 }
             }
-        }
-
-        int max=Integer.MIN_VALUE;
-        for(int num:dp){
-            System.out.println(num);
-            if(num>max) max=num;
+            if(dp[i]>max) max=dp[i];
         }
 
         return len-max;
