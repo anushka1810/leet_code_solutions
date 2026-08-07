@@ -49,6 +49,8 @@ class Solution {
     
     public int makeArrayIncreasing(int[] arr1, int[] arr2) {
         Arrays.sort(arr2);
+        //hashMap me Pair ko nhi key use kr sakte kyuki woh objects reference ko compare krega 
+        //p1=new Pair(prev,idx) &&  p2=new Pair(prev,idx) for same prev and idx .... p1 and p2 are different althrough theye have same values 
         // HashMap<Pair,Long> h=new HashMap<>();
         HashMap<String,Long> h=new HashMap<>();
         long value = helper(arr1,arr2,-1,0,h);
